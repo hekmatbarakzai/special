@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A magical 3D birthday surprise experience with heartfelt memories, floating decorations, and interactive moments."
+    />
+    <title>Birthday Surprise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="loading-screen" class="loading-screen" aria-live="polite">
+      <div class="loading-backdrop"></div>
+      <div class="loading-core">
+        <div class="loading-heart-wrap">
+          <div class="loading-heart"></div>
+          <span class="loading-particle p1"></span>
+          <span class="loading-particle p2"></span>
+          <span class="loading-particle p3"></span>
+          <span class="loading-particle p4"></span>
+        </div>
+        <h2>Something Magical Is Waiting For You...</h2>
+        <div class="loading-bar">
+          <span id="loading-fill"></span>
+        </div>
+        <div class="loading-text">
+          <span id="loading-label">Preparing your surprise</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="music-float" aria-label="Audio controls">
+      <button id="music-toggle" type="button" aria-label="Play or pause music">♫</button>
+      <input id="music-volume" type="range" min="0" max="1" step="0.01" value="0.5" aria-label="Music volume" />
+    </div>
+
+    <div class="page-shell">
+      <canvas id="three-scene" aria-hidden="true"></canvas>
+
+      <header class="topbar">
+        <div class="brand">Birthday Magic</div>
+        <nav aria-label="Main navigation">
+          <a href="#hero">Home</a>
+          <a href="#gallery">Memories</a>
+          <a href="#cake">Cake</a>
+          <a href="#reasons">Reasons</a>
+          <a href="#letter">Letter</a>
+        </nav>
+      </header>
+
+      <main>
+        <section id="intro" class="scene intro-scene panel">
+          <div class="intro-glow"></div>
+          <div class="gift-stage">
+            <div class="gift-stack" id="giftStack">
+              <div class="gift-box" id="giftBox">
+                <div class="gift-lid"></div>
+                <div class="gift-body"></div>
+                <div class="gift-ribbon ribbon-vertical"></div>
+                <div class="gift-ribbon ribbon-horizontal"></div>
+                <div class="gift-shadow"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="intro-copy">
+            <p class="intro-kicker">Hey <span data-name="greeting">Sweetheart</span>... ❤️</p>
+            <h2>I Made Something Special Just For You.</h2>
+            <button id="openGift" class="special-btn primary" type="button">
+              🎁 OPEN YOUR SURPRISE
+            </button>
+          </div>
+        </section>
+
+        <section id="hero" class="hero panel">
+          <div class="hero-copy">
+            <p class="eyebrow">✨ HAPPY BIRTHDAY ✨</p>
+            <h1 class="name-title" data-name="hero">Sweetheart</h1>
+            <p class="hero-tagline">Today is all about celebrating someone truly special.</p>
+            <div class="cta-row">
+              <a href="#gifts" class="special-btn primary">💖 Discover Your Surprise</a>
+              <a href="#gallery" class="special-btn ghost">📸 Explore Our Memories</a>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Decorative birthday scene">
+            <div class="hero-photo-placeholder empty-photo-slot" aria-label="Main hero photo placeholder">
+              <span>Your hero photo will appear here</span>
+            </div>
+            <div class="balloon balloon-one"></div>
+            <div class="balloon balloon-two"></div>
+            <div class="balloon balloon-three"></div>
+            <div class="cake-scene">
+              <div class="cake">
+                <div class="cake-layer layer-top"></div>
+                <div class="cake-layer layer-mid"></div>
+                <div class="cake-layer layer-bottom"></div>
+                <div class="cake-icing"></div>
+                <div class="candle candle-1"><span class="flame"></span></div>
+                <div class="candle candle-2"><span class="flame"></span></div>
+                <div class="candle candle-3"><span class="flame"></span></div>
+              </div>
+            </div>
+            <div class="photo-rail" id="decorative-photos"></div>
+          </div>
+        </section>
+
+        <section id="gallery" class="gallery panel">
+          <div class="section-heading">
+            <p class="eyebrow">Our Magic Moments</p>
+            <h2>Floating Memories</h2>
+          </div>
+
+          <div class="gallery-grid">
+            <div class="gallery-mode placeholder-mode" aria-label="Main photo gallery placeholder">
+              <div class="placeholder-spotlight empty-photo-slot">
+                <span>Your main gallery photo will appear here</span>
+              </div>
+            </div>
+
+            <div class="gallery-mode placeholder-mode" aria-label="Memory timeline placeholder">
+              <div class="placeholder-memory-grid">
+                <div class="memory-placeholder-card empty-photo-slot"><span>Your photo will appear here</span></div>
+                <div class="memory-placeholder-card empty-photo-slot"><span>Your photo will appear here</span></div>
+                <div class="memory-placeholder-card empty-photo-slot"><span>Your photo will appear here</span></div>
+              </div>
+            </div>
+
+            <div class="gallery-mode placeholder-mode" aria-label="Special moments placeholder">
+              <div class="placeholder-timeline">
+                <div class="timeline-placeholder-item empty-photo-slot"><span>Special moment photo</span></div>
+                <div class="timeline-placeholder-item empty-photo-slot"><span>Special moment photo</span></div>
+                <div class="timeline-placeholder-item empty-photo-slot"><span>Special moment photo</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="cake" class="cake-section panel">
+          <div class="section-heading center">
+            <p class="eyebrow">Make a Wish</p>
+            <h2>Make A Wish... ✨</h2>
+          </div>
+
+          <div class="cake-stage-wrap">
+            <div class="cake-visual">
+              <div class="cake-display" id="cakeDisplay">
+                <div class="cake-display-inner">
+                  <div class="cake-mini"></div>
+                  <div class="cake-mini icing"></div>
+                  <div class="candle candle-mini c1"><span class="flame"></span></div>
+                  <div class="candle candle-mini c2"><span class="flame"></span></div>
+                  <div class="candle candle-mini c3"><span class="flame"></span></div>
+                </div>
+              </div>
+              <div class="cake-message" id="cakeMessage">A little sparkle is waiting for you.</div>
+              <button id="blowCandles" class="special-btn primary" type="button">🕯️ Blow Out The Candles</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="gifts" class="gifts panel">
+          <div class="section-heading center">
+            <p class="eyebrow">Little Surprises</p>
+            <h2>Open Your Gifts</h2>
+          </div>
+
+          <div class="gift-grid" id="giftGrid">
+            <button class="gift-card gift-message" type="button" data-gift="message">
+              <span class="gift-label">Gift 1</span>
+              <span class="gift-title">A Special Message</span>
+            </button>
+            <button class="gift-card gift-memories" type="button" data-gift="memories">
+              <span class="gift-label">Gift 2</span>
+              <span class="gift-title">Our Beautiful Memories</span>
+            </button>
+            <button class="gift-card gift-final" type="button" data-gift="final">
+              <span class="gift-label">Gift 3</span>
+              <span class="gift-title">One Final Surprise</span>
+            </button>
+          </div>
+        </section>
+
+        <section id="special-moments" class="panel special-moments">
+          <div class="section-heading center">
+            <p class="eyebrow">Special Moments</p>
+            <h2>Our Favorite Memories</h2>
+          </div>
+          <div class="special-moments-grid">
+            <div class="special-moment-card empty-photo-slot"><span>Your photo will appear here</span></div>
+            <div class="special-moment-card empty-photo-slot"><span>Your photo will appear here</span></div>
+            <div class="special-moment-card empty-photo-slot"><span>Your photo will appear here</span></div>
+          </div>
+        </section>
+
+        <section id="reasons" class="reasons panel">
+          <div class="section-heading center">
+            <p class="eyebrow">Why You Shine</p>
+            <h2>10 Reasons Why You're So Special ❤️</h2>
+          </div>
+          <div class="reason-grid" id="reasonGrid"></div>
+        </section>
+
+        <section id="letter" class="letter panel">
+          <div class="section-heading center">
+            <p class="eyebrow">A Note For You</p>
+            <h2>There's Something I've Always Wanted To Tell You...</h2>
+          </div>
+
+          <div class="letter-scene" id="letterScene">
+            <div class="envelope-wrap">
+              <div class="envelope" id="envelope" aria-label="Open birthday letter">
+                <div class="flap"></div>
+              </div>
+            </div>
+            <div class="letter-container" id="letterContainer">
+              <div class="letter-card">
+                <h3>For <span data-name="letter">Sweetheart</span></h3>
+                <p id="letterText"></p>
+              </div>
+            </div>
+            <div class="letter-actions">
+              <button id="readLetter" class="special-btn primary" type="button">💌 Read Your Letter</button>
+              <button id="replayLetter" class="special-btn ghost" type="button">Replay</button>
+              <button id="closeLetter" class="special-btn ghost alt" type="button">Close</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="wishes" class="wishes panel">
+          <div class="section-heading center">
+            <p class="eyebrow">Starlight Wishes</p>
+            <h2>Every Star Holds A Wish For You ✨</h2>
+          </div>
+          <div class="wish-grid" id="wishGrid" aria-label="Interactive birthday wishes"></div>
+        </section>
+
+        <section id="countdown" class="countdown panel">
+          <div class="section-heading center">
+            <p class="eyebrow">Countdown</p>
+            <h2>Birthday Countdown</h2>
+          </div>
+          <div class="countdown-wrap" id="countdownWrap"></div>
+        </section>
+
+        <section id="finale" class="finale panel">
+          <div class="finale-inner">
+            <p class="eyebrow">One Last Thing...</p>
+            <h2>Happy Birthday Again, <span data-name="finale">Sweetheart</span>! ❤️</h2>
+            <p class="finale-message">May your year sparkle brighter than ever before.</p>
+            <div class="finale-actions">
+              <button id="celebrateAgain" class="special-btn primary" type="button">🎉 CELEBRATE AGAIN</button>
+              <button id="restartExperience" class="special-btn ghost" type="button">💖 Experience Everything Again</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+      <button class="lightbox-close" id="closeLightbox" aria-label="Close lightbox">✕</button>
+      <div class="lightbox-content">
+        <img id="lightboxImage" src="" alt="Birthday memory" />
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="./config.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
